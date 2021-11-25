@@ -22,7 +22,8 @@ service.signup = async (req, res, next) => {
                 isActive: true
             });
             let response = await user.save();
-            res.send({ 'data': response });
+            // res.send({ 'data': response });
+            res.redirect('/user/login');
         } else {
             res.send({ 'message': 'User already exists' });
 
@@ -35,38 +36,42 @@ service.signup = async (req, res, next) => {
 }
 
 service.login = async (req, res, next) => {
-    // try {
-    const userExists = await User.findOne({ email: req.body.email.toLowerCase() });
-    console.log(userExists);
-    if (userExists) {
-        const enteredPassword = utility.createPassword(userExists.rand, req.body.password);
-        console.log(enteredPassword);
-        console.log(userExists.password);
-        if (enteredPassword == userExists.password) {
-            userExists.isActive = true;
-            let response = await userExists.save();
-            const token = utility.createJwtToken({
-                id: response.id,
-                email: response.email,
-                userType: response.userType
-            });
-            response = {
-                ...JSON.parse(JSON.stringify(response)),
-                token: token
+    // console.log(req.user);
+    try {
+        const userExists = await User.findOne({ email: req.body.email.toLowerCase() });
+        // console.log(userExists);
+        if (userExists) {
+            const enteredPassword = utility.createPassword(userExists.rand, req.body.password);
+            // console.log(enteredPassword);
+            // console.log(userExists.password);
+            if (enteredPassword == userExists.password) {
+                userExists.isActive = true;
+                let response = await userExists.save();
+                const token = await utility.createJwtToken({
+                    id: response._id,
+                    email: response.email,
+                    userType: response.userType
+                });
+                response = {
+                    ...JSON.parse(JSON.stringify(response)),
+                    token: token
+                }
+                await res.redirect('/?token=' + token);
+                // res.send(response);
+            } else {
+                res.send({ 'message': 'Enter correct password' });
             }
-            res.send(response);
         } else {
-            res.send({ 'message': 'Enter correct password' });
-        }
-    } else {
-        res.send({ 'message': 'User Does not exist' });
+            res.send({ 'message': 'User Does not exist' });
 
+        }
+    }
+    catch (error) {
+        res.send({ 'error': error });
     }
 
 }
-// catch (error) {
-//     res.send({ 'error': error });
-// }
+
 
 
 module.exports = service;

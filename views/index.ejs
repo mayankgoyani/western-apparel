@@ -1,0 +1,11 @@
+<%- include ('partials/header') %>
+<% if (typeof token != "undefined") { %>
+  <% var user = token %>
+  <script>
+    let user = <%- JSON.stringify(user) %>;
+    localStorage.setItem('Authorization', user);
+  </script>
+<% } %>
+    
+        <%- include ('partials/navbar') %>
+          <%- include ('partials/footer') %>

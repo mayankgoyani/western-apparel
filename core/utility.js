@@ -55,7 +55,9 @@ utility.jwtAuth = async (req, res, next) => {
         return res.send(newObj);
     }
 
-    let arr_allowed = ['user/login'];
+    let arr_allowed = ['/user/login','/user/signup'];
+
+
 
     if (arr_allowed.indexOf(req._parsedUrl.pathname) >= 0) {
         next()
@@ -66,7 +68,7 @@ utility.jwtAuth = async (req, res, next) => {
 
             jwt.verify(req.headers.authorization, "shhhhh", function (err, decode) {
 
-                console.log(err);
+                // console.log(err);
                 if (err) {
                     req.user = undefined;
                     if (err.name == "TokenExpiredError") {
