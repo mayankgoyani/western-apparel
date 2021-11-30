@@ -56,14 +56,16 @@ service.login = async (req, res, next) => {
                     ...JSON.parse(JSON.stringify(response)),
                     token: token
                 }
-                await res.redirect('/?token=' + token);
+                req.session.token = token;
+                req.session.isLoggedIn = true;
+                req.session.userType = response.userType;
+                await res.redirect('/index');
                 // res.send(response);
             } else {
                 res.send({ 'message': 'Enter correct password' });
             }
         } else {
             res.send({ 'message': 'User Does not exist' });
-
         }
     }
     catch (error) {

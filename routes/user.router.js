@@ -22,9 +22,6 @@ router.get('/signup', (req, res, next) => {
 });
 router.post('/signup', user.signup);
 
-router.get('/xyz', async (req, res, next) => {
-  console.log('testing api');
-});
 
 
 module.exports = router;

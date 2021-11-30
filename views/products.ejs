@@ -1,0 +1,102 @@
+<%- include ('partials/header') %>
+    <%- include ('partials/navbar') %>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom f-flex">
+            <a class="navbar-brand" href="#"></a>
+            <%if(userType=="Admin" ){%>
+
+                <div class="p-2">
+                    <button class="btn btn-warning " onclick="window.location.href='/admin/addProduct'">
+                        Add Item</button>
+                </div>
+                <%}%>
+
+
+
+                    <div class="nav justify-content-end text-right col-md">
+
+                        <div class="p-2">
+                            <form class="d-flex ">
+                                <!-- <label for="genre">Choose a category: </label> -->
+                                <select class="col-sm-6" name="type" id="type">
+                                    <option value="All">Choose a Category</option>
+                                    <option value="Boots">Boots</option>
+                                    <option value="Shirts">Shirts</option>
+                                </select>
+                                <input name="Search" type="text" placeholder="Search.." class="col-sm-3">
+                                <input class="btn btn-warning" type="submit" value="Search">
+                            </form>
+                        </div>
+
+
+                    </div>
+        </nav>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 text-center">
+                    <% if(page> 1) {%>
+                        <button class="btn btn-warning "
+                            onclick="window.location.href='/product/getProducts?page=<%= parseInt(page)-1%>'">
+                            Previous Page</button>
+                        <% }%>
+                </div>
+
+                <div class="text-center pages col-md-8"> Showing <%= (((page-1)*per_page) + 1) %> -
+                        <%=(count < (page*per_page)) ? count : (page*per_page) %>
+                            Items</div>
+
+                <div class="col-md-2 text-center">
+                    <% if(page < total_pages) {%>
+
+                        <button class="btn btn-warning"
+                            onclick="window.location.href='/product/getProducts?page=<%= parseInt(page)+1%>'">
+                            Next Page</button>
+                            <!-- <button class="btn btn-warning"
+                            onclick="window.location+=((window.location.href.indexOf('?')+1)?'':'?')+ (window.location.href.indexOf('page')+1)?'&page=<%= parseInt(page)+1%>':''">
+                            Next Page</button> -->
+                        <% }%>
+
+                </div>
+
+            </div>
+            <br>
+            <div class="row">
+                <% products.forEach(function(product){ %>
+
+                    <!-- <div class="card col-md-2" style="width: 18rem;"> -->
+                    <div class="card col-md-3" style="padding: 1px; background-color: rgb(253, 211, 133);">
+
+                        <img class="card-img-top" src="<%=product.images%>" alt="Card image cap" style="height: 400px;">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= product.name %>
+                            </h5>
+                            <p class="card-text">
+                                <%= product.price %>
+                            </p>
+                            <a href="/product/getProducts/<%= product._id %>" class="btn btn-danger">Details</a>
+                            <a href="#" class="btn btn-danger">Add to Cart</a>
+                            <%if(userType=="Admin" ){%>
+                                <a href="#" class="btn btn-danger">Edit Item</a>
+                                <%}%>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-2">
+                        <img src="<%=product.images%>" style="width:200px; height:200px;" class="img-thumbnail" />
+                        <div class="caption"><a href="/product/getProducts/<%= product._id %>">
+                                <%= product.name %>
+                            </a>
+                            <br>
+                            <p>
+                                <%= product.description %>
+                            </p>
+                        </div>
+                    </div> -->
+                    <% }); %>
+
+            </div>
+
+        </div>
+
+        <%- include ('partials/footer') %>

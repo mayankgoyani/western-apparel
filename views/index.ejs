@@ -1,11 +1,18 @@
 <%- include ('partials/header') %>
-<% if (typeof token != "undefined") { %>
-  <% var user = token %>
-  <script>
-    let user = <%- JSON.stringify(user) %>;
-    localStorage.setItem('Authorization', user);
-  </script>
-<% } %>
+  <%- include ('partials/navbar') %>
     
-        <%- include ('partials/navbar') %>
-          <%- include ('partials/footer') %>
+
+        <div class="container">
+          <div class="row text-center">
+            <div class="col">
+              <h1 id="wa-heading">Western Apparel</h1>
+            </div>
+          </div>
+          <div class="row text-center">
+
+            <div class="col">
+              <img src="images/index.jpg" alt="index" class="responsive" id="indexImage">
+            </div>
+          </div>
+        </div>
+        <%- include ('partials/footer') %>
