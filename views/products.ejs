@@ -9,22 +9,29 @@
                         Add Item</button>
                 </div>
                 <%}%>
-
-
+                <div class="p-2">
+                    <button class="btn btn-warning"
+                        onclick="window.location.href='/product/getProducts?clear=<%=true%>'">
+                        Clear Filter</button>
+                </div>
 
                     <div class="nav justify-content-end text-right col-md">
 
-                        <div class="p-2">
+                        <div class="p-2 d-inline">
                             <form class="d-flex ">
                                 <!-- <label for="genre">Choose a category: </label> -->
                                 <select class="col-sm-6" name="type" id="type">
                                     <option value="All">Choose a Category</option>
-                                    <option value="Boots">Boots</option>
-                                    <option value="Shirts">Shirts</option>
+                                    <option value="Jeans">Jeans</option>
+                                    <option value="Shirt">Shirt</option>
+                                    <option value="T-Shirt">T-Shirt</option>
                                 </select>
                                 <input name="Search" type="text" placeholder="Search.." class="col-sm-3">
                                 <input class="btn btn-warning" type="submit" value="Search">
+
                             </form>
+
+
                         </div>
 
 
@@ -51,7 +58,7 @@
                         <button class="btn btn-warning"
                             onclick="window.location.href='/product/getProducts?page=<%= parseInt(page)+1%>'">
                             Next Page</button>
-                            <!-- <button class="btn btn-warning"
+                        <!-- <button class="btn btn-warning"
                             onclick="window.location+=((window.location.href.indexOf('?')+1)?'':'?')+ (window.location.href.indexOf('page')+1)?'&page=<%= parseInt(page)+1%>':''">
                             Next Page</button> -->
                         <% }%>
@@ -77,7 +84,7 @@
                             <a href="/product/getProducts/<%= product._id %>" class="btn btn-danger">Details</a>
                             <a href="#" class="btn btn-danger">Add to Cart</a>
                             <%if(userType=="Admin" ){%>
-                                <a href="#" class="btn btn-danger">Edit Item</a>
+                                <a href="/admin/<%= product._id %>/editProduct" class="btn btn-danger">Edit Item</a>
                                 <%}%>
                         </div>
                     </div>

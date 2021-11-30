@@ -9,28 +9,34 @@
         <div class="col-md-6">
           <br>
           <br>
-          <h3>User Login</h3>
-          <form id="myForm" action="" method="POST">
-            <div class="form-group">
-              <label for="username">Email:</label>
-              <input type="text" class="form-control" name="email" placeholder="Email" id="email">
-            </div>
-            <br>
-            <br>
+          <%if(errors){%>
+            <%errors.forEach(function(error){%>
+              <div class="alert alert-danger" role="alert">
+                <%=error.msg%>
+              </div>
+              <%})}%>
+                <h3>User Login</h3>
+                <form id="myForm" action="" method="POST">
+                  <div class="form-group">
+                    <label for="username">Email:</label>
+                    <input type="text" class="form-control" name="email" placeholder="Email" id="email">
+                  </div>
+                  <br>
+                  <br>
 
-            <div class="form-group">
-              <label for="pwd">Password:</label>
-              <input type="password" class="form-control" name="password" placeholder="Password" id="pwd">
-            </div>
-            <br>
-            <div class="form-group">
-              <p>Not a User? <span><a href="/user/signup">Sign Up</a></span></p>
-            </div>
+                  <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password" id="pwd">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <p>Not a User? <span><a href="/user/signup">Sign Up</a></span></p>
+                  </div>
 
-            <br>
-            <br>
-            <button type="submit" class="btn btn-warning" value="Login" id="loginButton">Login</button>
-          </form>
+                  <br>
+                  <br>
+                  <button type="submit" class="btn btn-warning" value="Login" id="loginButton">Login</button>
+                </form>
 
 
         </div>

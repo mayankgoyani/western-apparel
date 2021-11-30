@@ -1,49 +1,63 @@
 <%- include ('../partials/header') %>
-<%- include ('../partials/navbar') %>
+	<%- include ('../partials/navbar') %>
 
 
-	<div class="container">
-		<h1> New Product </h1>
+		<div class="container">
+			<h1> Edit Product </h1>
 
 
-		<form action="" method="POST">
+			<form action="/admin/<%= product._id %>/editProduct" method="POST">
 
-			<div class="form-group">
-				<input type="text" name="name" class="form-control" placeholder="name">
-			</div>
-            <br>
-			<div class="form-group">
-                <label for="">insert multiple size by spacing between them</label>
-				<input type="text" name="size" class="form-control" placeholder="size">
-			</div>
-            <br>
-            <div class="form-group">
-				<input type="text" name="price" class="form-control" placeholder="price">
-			</div>
-            <br>
-            <div class="form-group">
-                <label for="">insert multiple color by spacing between them</label>
-				<input type="text" name="color" class="form-control" placeholder="colors">
-			</div>
-            <br>
-			<div class="form-group">
-				<input type="text" name="image" class="form-control" placeholder="image name">
-			</div>
-            <br>
-            <div class="form-group">
-				<input type="text" name="type" class="form-control" placeholder="type">
-			</div>
-            <br>
-			<div class="form-group">
-				<textarea name="description" class="form-control" placeholder="description"></textarea>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-info">Save</button>
-			</div>
-		</form>
+				<div class="form-group">
+					<label for="">name</label>
+					<input type="text" name="name" class="form-control" placeholder="name" value="<%= product.name %>">
+				</div>
+				<br>
+				<div class="form-group">
+					<%let size='' ; product.size.forEach(function(sizes){ size += sizes.toString() + ' ' }) %>
+						<label for="">sizes</label>
+						<br>
+						<label for="">insert multiple size by spacing between them</label>
+						<input type="text" name="size" class="form-control" placeholder="size" value="<%= size %>">
+				</div>
+				<br>
+				<div class="form-group">
+					<label for="">price</label>
+					<input type="text" name="price" class="form-control" placeholder="price"
+						value="<%= product.price %>">
+				</div>
+				<br>
+				<div class="form-group">
+					<%let color='' ; product.color.forEach(function(colors){ color += colors.toString() + ' ' }) %>
+						<label for="">color</label>
+						<br>
+						<label for="">insert multiple color by spacing between them</label>
+						<input type="text" name="color" class="form-control" placeholder="colors" value="<%= color %>">
+				</div>
+				<br>
+				<div class="form-group">
+					<label for="">image</label>
+					<input type="text" name="image" class="form-control" placeholder="image name"
+						value="<%= product.images %>">
+				</div>
+				<br>
+				<div class="form-group">
+					<label for="">type</label>
+					<input type="text" name="type" class="form-control" placeholder="type" value="<%= product.type %>">
+				</div>
+				<br>
+				<div class="form-group">
+					<label for="">description</label>
+					<textarea name="description" class="form-control"
+						placeholder="description"><%= product.description %></textarea>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-info">Save</button>
+				</div>
+			</form>
 
-		<a href="/">Cancel</a>
+			<a href="/">Cancel</a>
 
-	</div>
+		</div>
 
-	<%- include ('../partials/footer') %>
+		<%- include ('../partials/footer') %>

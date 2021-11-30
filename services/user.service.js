@@ -5,7 +5,14 @@ const randToken = require('rand-token');
 
 
 service.signup = async (req, res, next) => {
+    let errors = [];
+
     try {
+        if (req.body.password != req.body.confirmPassword) {
+            errors.push({ msg: 'Password is not mached' });
+            res.render('register', { 'errors': errors });
+
+        }
         const userExists = await User.findOne({ email: req.body.email.toLowerCase() });
         if (!userExists) {
 
@@ -25,8 +32,8 @@ service.signup = async (req, res, next) => {
             // res.send({ 'data': response });
             res.redirect('/user/login');
         } else {
-            res.send({ 'message': 'User already exists' });
-
+            errors.push({ msg: 'User already exists' });
+            res.render('register', { 'errors': errors });
         }
     }
     catch (error) {
@@ -36,8 +43,13 @@ service.signup = async (req, res, next) => {
 }
 
 service.login = async (req, res, next) => {
+    let errors = [];
     // console.log(req.user);
     try {
+        if (req.body.email == '') {
+            errors.push({ msg: 'Enter email address' });
+            res.render('login', { 'errors': errors });
+        }
         const userExists = await User.findOne({ email: req.body.email.toLowerCase() });
         // console.log(userExists);
         if (userExists) {
@@ -62,10 +74,13 @@ service.login = async (req, res, next) => {
                 await res.redirect('/index');
                 // res.send(response);
             } else {
-                res.send({ 'message': 'Enter correct password' });
+                errors.push({ msg: 'Enter Correct Password' });
+                res.render('login', { 'errors': errors });
+
             }
         } else {
-            res.send({ 'message': 'User Does not exist' });
+            errors.push({ msg: 'User is not Exists' });
+            res.render('login', { 'errors': errors });
         }
     }
     catch (error) {
