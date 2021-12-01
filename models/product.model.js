@@ -8,6 +8,7 @@ const productSchema = new Schema({
     color: [{ type: String, required: true }],
     images: { type: String, required: true },
     type: { type: String },
+    countInStock: { type: Number },
     description: { type: String, required: true },
     deleted: { type: Boolean, default: false }
 });
