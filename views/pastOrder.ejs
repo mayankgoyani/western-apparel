@@ -1,0 +1,68 @@
+<%- include ('partials/header') %>
+    <%- include ('partials/navbar') %>
+
+
+        <div class="col-lg-9 col-md-9 col-sm-12 " style="width: 100%;">
+            <div class="col-lg-12 col-sm-12">
+                <span class="title text-center">
+                    <h3>Past Orders</h3>
+                </span>
+            </div>
+            <div class="col-lg-12 col-sm-12 hero-feature">
+                <div class="table-responsive">
+                    <table class="table table-bordered tbl-cart">
+                        <thead>
+                            <tr>
+                                <td class="hidden-xs">Image</td>
+                                <td>Product Name</td>
+                                <td>Size</td>
+                                <td>Color</td>
+                                <td>Quantity</td>
+                                <td>Unit Price</td>
+                                <td>Sub Total</td>
+                                <td>Order Date</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%products.forEach(function(product){%>
+                                <tr>
+                                    <td class="hidden-xs">
+                                        <a href="/product/getProducts/<%=product.product._id%>">
+                                            <img src="<%=product.product.images%>" alt="" title="" width="47"
+                                                height="47">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <%=product.product.name%>
+                                    </td>
+                                    <td>
+                                        <%=product.size%>
+                                    </td>
+                                    <td>
+                                        <%=product.color%>
+                                    </td>
+                                    <td>
+                                        <%=product.quantity%>
+                                    </td>
+                                    <td class="price">
+                                        $<%=product.product.price%>
+
+                                    </td>
+                                    <td>
+                                        $<%=parseInt(product.product.price)*product.quantity%>
+                                    </td>
+                                    <td class="text-center">
+                                        <%=product.date%>
+                                            <!-- <a href="/cart/<%=product._id%>/deleteCart?_method=DELETE" data-method="delete" class="remove_cart" rel="2"> -->
+                                            <!-- </a> -->
+                                    </td>
+                                </tr>
+                                <%})%>
+                        </tbody>
+                    </table>
+                </div>
+                
+
+            </div>
+        </div>
+        <%- include ('partials/footer') %>

@@ -26,6 +26,11 @@ router.get('/signup', (req, res, next) => {
 
 router.post('/signup', validation.register, validation.check, user.signup);
 
+router.get('/logout', user.logout);
+
+
+
+
 
 
 module.exports = router;

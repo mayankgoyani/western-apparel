@@ -9,7 +9,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get('/index', async function (req, res, next) {
-  console.log(req.session.userType);
+  // console.log(req.session.userType);
   res.cookie('type', undefined, { path: '/product' });
   res.cookie('search', undefined, { path: '/product' });
 

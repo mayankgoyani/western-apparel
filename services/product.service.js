@@ -1,6 +1,8 @@
 const service = {};
 const Product = require('../models/product.model');
 const User = require('../models/user.model');
+const Order = require('../models/order.model');
+const Cart = require('../models/cart.model');
 const utility = require('../core/utility');
 
 
@@ -157,7 +159,7 @@ service.getProduct = async (req, res, next) => {
         (err, product) => {
             if (err) throw err;
             // console.log(product);
-            res.render('singleProdcut', { product: product });
+            res.render('singleProdcut', { product: product, userType: req.session.userType });
         });
 };
 

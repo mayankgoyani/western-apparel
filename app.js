@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const dotenv = require("dotenv");
+var methodOveride = require('method-override');
+
 dotenv.config();
 
 const session = require('express-session');
@@ -16,6 +18,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user.router');
 var adminRouter = require('./routes/admin.router');
 var productRouter = require('./routes/product.router');
+var cartRouter = require('./routes/cart.router');
+var orderRouter = require('./routes/order.router');
 
 var app = express();
 
@@ -30,11 +34,19 @@ app.use(session({ secret: 'shhhhh', resave: false, saveUninitialized: false, sto
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(methodOveride('_method'));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.userName = req.session.userName;
+  next();
+});
+
 
 
 //jwt auth
@@ -43,7 +55,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/admin', adminRouter);
-app.use('/product', productRouter)
+app.use('/product', productRouter);
+app.use('/cart', cartRouter);
+app.use('/order', orderRouter);
+
+
+
+
 
 
 

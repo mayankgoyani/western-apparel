@@ -27,12 +27,12 @@ utility.loginRequired = function (req, res, next) {
 utility.jwtAuth = async (req, res, next) => {
     const token = req.session.token;
 
-    if (token == null) return res.status(401).render('error')
+    if (token == null) return res.redirect('/user/login')
 
     jwt.verify(req.session.token, "shhhhh", function (err, decode) {
         // console.log(err)
 
-        if (err) return res.status(401).render('error');
+        if (err) return res.redirect('/user/login')
 
         req.user = decode;
         next()

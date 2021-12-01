@@ -2,40 +2,41 @@
     <%- include ('partials/navbar') %>
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom f-flex">
             <a class="navbar-brand" href="#"></a>
-            <%if(userType=="Admin" ){%>
+            <div class="row">
+                <%if(userType=="Admin" ){%>
 
-                <div class="p-2">
-                    <button class="btn btn-warning " onclick="window.location.href='/admin/addProduct'">
-                        Add Item</button>
-                </div>
-                <%}%>
-                <div class="p-2">
-                    <button class="btn btn-warning"
-                        onclick="window.location.href='/product/getProducts?clear=<%=true%>'">
-                        Clear Filter</button>
-                </div>
+                    <div class="p-2 col-md-2">
+                        <button class="btn btn-danger " onclick="window.location.href='/admin/addProduct'">
+                            Add Item</button>
+                    </div>
+                    <%}%>
+                        <div class="p-2 col-md-3">
+                            <button class="btn btn-warning"
+                                onclick="window.location.href='/product/getProducts?clear=<%=true%>'">
+                                Clear Filter</button>
+                        </div>
 
-                    <div class="nav justify-content-end text-right col-md">
+                        <div class="nav justify-content-end text-right col-md-7">
 
-                        <div class="p-2 d-inline">
-                            <form class="d-flex ">
-                                <!-- <label for="genre">Choose a category: </label> -->
-                                <select class="col-sm-6" name="type" id="type">
-                                    <option value="All">Choose a Category</option>
-                                    <option value="Jeans">Jeans</option>
-                                    <option value="Shirt">Shirt</option>
-                                    <option value="T-Shirt">T-Shirt</option>
-                                </select>
-                                <input name="Search" type="text" placeholder="Search.." class="col-sm-3">
-                                <input class="btn btn-warning" type="submit" value="Search">
+                            <div class="p-2">
+                                <form class="d-flex ">
+                                    <!-- <label for="genre">Choose a category: </label> -->
+                                    <select class="col-sm-6" name="type" id="type">
+                                        <option value="All">Choose a Category</option>
+                                        <option value="Jeans">Jeans</option>
+                                        <option value="Shirt">Shirt</option>
+                                        <option value="T-Shirt">T-Shirt</option>
+                                    </select>
+                                    <input name="Search" type="text" placeholder="Search.." class="col-sm-3">
+                                    <input class="btn btn-warning" type="submit" value="Search">
+                                </form>
 
-                            </form>
+
+                            </div>
 
 
                         </div>
-
-
-                    </div>
+            </div>
         </nav>
         <br>
         <div class="container">
@@ -79,10 +80,9 @@
                                 <%= product.name %>
                             </h5>
                             <p class="card-text">
-                                <%= product.price %>
+                                $<%= product.price %>
                             </p>
                             <a href="/product/getProducts/<%= product._id %>" class="btn btn-danger">Details</a>
-                            <a href="#" class="btn btn-danger">Add to Cart</a>
                             <%if(userType=="Admin" ){%>
                                 <a href="/admin/<%= product._id %>/editProduct" class="btn btn-danger">Edit Item</a>
                                 <%}%>

@@ -5,9 +5,8 @@ const cartSchema = new Schema({
     userId: { type: Schema.Types.ObjectId },
     color: { type: String },
     size: { type: String },
-    price: { type: String },
     quantity: { type: Number, default: 1 },
-    productId: [{ type: Schema.Types.ObjectId }],
+    product: { type: Schema.Types.ObjectId, ref: 'Product' }
 });
 
 module.exports = mongoose.model("Cart", cartSchema);

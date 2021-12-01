@@ -1,5 +1,8 @@
 const service = {};
-const User = require('../models/user.model')
+const Product = require('../models/product.model');
+const User = require('../models/user.model');
+const Order = require('../models/order.model');
+const Cart = require('../models/cart.model');
 const utility = require('../core/utility')
 const randToken = require('rand-token');
 
@@ -71,6 +74,8 @@ service.login = async (req, res, next) => {
                 req.session.token = token;
                 req.session.isLoggedIn = true;
                 req.session.userType = response.userType;
+                req.session.userName = response.firstname;
+                // return res.json(response);
                 await res.redirect('/index');
                 // res.send(response);
             } else {
@@ -87,6 +92,12 @@ service.login = async (req, res, next) => {
         res.send({ 'error': error });
     }
 
+}
+
+service.logout = async (req, res, next) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    })
 }
 
 

@@ -3,20 +3,81 @@
 
 
 
-        <div class="container text-center">
-            <h1 class="text-center"> Product Details </h1>
+        <div class="container text-center row">
             <!-- <%console.log(product.images)%> -->
-            <p><img src="<%=product.images%>" /></p>
-            <p>Name: <%= product.name %>
-            </p>
-            <p>Price: <%= product.price %>
-            </p>
-            <p>Description: <%= product.description %>
-            </p>
+            <div class="col-md-6">
+                <h2 class="text-center">
+                    <%= product.name %>
+                </h2>
+                <br>
+                <p><img src="<%=product.images%>" /></p>
+
+            </div>
+            <div class="col-md-6">
+                <br>
+                <br>
+                <br>
+
+                <p>Price: $<%= product.price %>
+                </p>
+                <p>Description: <%= product.description %>
+                </p>
+                <form id="myForm" action="/cart/<%=product._id%>/addtoCart" method="POST" class="form-row">
+                    <div class="col">
+                        <label for="size">Select a Size</label>
+                        <select name="size" id="size">
+                            <% product.size.forEach(function(sizes){ %>
+                                <option value="<%= sizes %>">
+                                    <%= sizes %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="col">
+                        <label for="color">Select a Color</label>
+                        <select name="color" id="color">
+                            <% product.color.forEach(function(colors){ %>
+                                <option value="<%= colors %>">
+                                    <%= colors %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="col">
+                        <label for="quantity">Select a Quantity</label>
+                        <select name="quantity" id="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+
+                        </select>
+                    </div>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-warning" value="addtoCart" id="addtoCart">Add to Cart</button>
+                </form>
+                <br>
+                <%if(userType=="Admin" ){%>
+                    <a href="/admin/<%= product._id %>/editProduct" class="btn btn-danger">Edit Item</a>
+                    <%}%>
+                        <br>
+                        <br>
+                        <p>
+                            <a href="/product/getProducts">Back to List</a>
+                        </p>
+
+            </div>
 
 
-            <a class="btn btn-warning" href="/admin/<%= product._id %>/editProduct" role="button">
-                Edit product</a>
+
+
+
+            <!-- <a class="btn btn-warning" href="/admin/<%= product._id %>/editProduct" role="button">
+                Edit product</a> -->
 
             <!-- <form action="/videos/<%= product._id %>?_method=DELETE" method="POST">
 
@@ -24,9 +85,6 @@
 
             </form> -->
 
-            <p>
-                <a href="/product/getProducts">Back to List</a>
-            </p>
 
         </div>
         <%- include ('partials/footer') %>

@@ -1,6 +1,8 @@
 const service = {};
 const Product = require('../models/product.model');
 const User = require('../models/user.model');
+const Order = require('../models/order.model');
+const Cart = require('../models/cart.model');
 const utility = require('../core/utility');
 
 service.addProduct = async (req, res, next) => {
@@ -23,7 +25,7 @@ service.getEditProduct = async (req, res, next) => {
         { _id: req.params.id },
         (err, products) => {
             if (err) throw err;
-            console.log(products);
+            // console.log(products);
             res.render('admin/editProduct', { product: products });
         });
 }
