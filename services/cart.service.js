@@ -14,7 +14,7 @@ service.getCart = (req, res, next) => {
         // console.log(result);
         // res.json(result);
         result.forEach((results)=>{
-            console.log(results.quantity * results.product.price);
+            // console.log(results.quantity * results.product.price);
             finalTotal += results.quantity * results.product.price;
         })
         res.render('cart', { products: result, finalTotal : finalTotal });
