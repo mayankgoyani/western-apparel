@@ -74,7 +74,7 @@ service.getProducts = async (req, res, next) => {
         let page = req.query.page || 1
         let count = await Product.count({});
         let per_page = 12, total_pages = Math.ceil(count / per_page);
-        Product.find({}).skip((page - 1) * per_page).limit(12).exec((err, product) => {
+        Product.find({ deleted: false }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
             if (err) throw err;
             // console.log(total_pages);
             // return
@@ -92,7 +92,7 @@ service.getProducts = async (req, res, next) => {
         let page = req.query.page || 1
         let count = await Product.count({ type: typeCookie });
         let per_page = 12, total_pages = Math.ceil(count / per_page);
-        Product.find({ type: typeCookie }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
+        Product.find({ type: typeCookie, deleted: false }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
             if (err) throw err;
             // console.log(total_pages);
             // return
@@ -113,7 +113,7 @@ service.getProducts = async (req, res, next) => {
         // console.log(regex);
         let count = await Product.count({ name: regex });
         let per_page = 12, total_pages = Math.ceil(count / per_page);
-        Product.find({ name: regex }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
+        Product.find({ name: regex, deleted: false }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
             if (err) throw err;
             // console.log(total_pages);
             // return
@@ -133,7 +133,7 @@ service.getProducts = async (req, res, next) => {
         // console.log(regex);
         let count = await Product.count({ name: regex, type: typeCookie });
         let per_page = 12, total_pages = Math.ceil(count / per_page);
-        Product.find({ name: regex, type: typeCookie }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
+        Product.find({ name: regex, type: typeCookie, deleted: false }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
             if (err) throw err;
             // console.log(total_pages);
             // return

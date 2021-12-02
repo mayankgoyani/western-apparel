@@ -82,10 +82,46 @@
                             <p class="card-text">
                                 $<%= product.price %>
                             </p>
-                            <a href="/product/getProducts/<%= product._id %>" class="btn btn-danger">Details</a>
+                            <!-- <form action="/product/getProducts/<%= product._id %>">
+                                <button class="btn btn-danger"> Details</button>
+                            </form> -->
+                            <br>
+                            <!-- <a href="/product/getProducts/<%= product._id %>" class="btn btn-danger">Details</a> -->
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form action="/product/getProducts/<%= product._id %>">
+                                            <button class="btn btn-danger"> Details</button>
+                                        </form>
+                                    </div>
+                                    <%if(userType=="Admin" ){%>
+
+                                        <div class="col-md-3">
+                                            <form action="/admin/<%= product._id %>/editProduct">
+                                                <button class="btn btn-danger"> Edit</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <form action="/admin/<%= product._id %>/deleteProduct?_method=DELETE"
+                                                method="POST">
+                                                <button class="btn btn-danger"> Delete</button>
+                                            </form>
+                                        </div>
+
+                                        <%}%>
+
+                                </div>
+                            </div>
+
+                            <!-- <a href="/admin/<%= product._id %>/editProduct" class="btn btn-danger">Edit Item</a> -->
+
+                            <!-- <a href="/admin/<%= product._id %>/deleteProduct" class="btn btn-danger">Delete
+                                    Item</a> -->
+
+                            <!-- <a href="/product/getProducts/<%= product._id %>" class="btn btn-danger">Details</a>
                             <%if(userType=="Admin" ){%>
                                 <a href="/admin/<%= product._id %>/editProduct" class="btn btn-danger">Edit Item</a>
-                                <%}%>
+                                <%}%> -->
                         </div>
                     </div>
 

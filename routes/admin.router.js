@@ -9,6 +9,9 @@ router.get('/addProduct', utility.jwtAuth, (req, res, next) => {
 
 router.post('/addProduct', utility.jwtAuth, admin.addProduct);
 
+router.delete('/:id/deleteProduct', utility.jwtAuth, admin.deleteProduct);
+
+
 router.get('/:id/editProduct', utility.jwtAuth, admin.getEditProduct);
 router.post('/:id/editProduct', utility.jwtAuth, admin.postEditProduct);
 

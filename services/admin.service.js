@@ -20,6 +20,15 @@ service.addProduct = async (req, res, next) => {
     res.redirect('/product/getProducts');
 }
 
+service.deleteProduct = async (req, res, next) => {
+    await Product.updateOne({ _id: req.params.id }, {
+        $set: {
+            deleted: true
+        }
+    });
+    res.redirect('/product/getProducts');
+}
+
 service.getEditProduct = async (req, res, next) => {
     Product.findOne(
         { _id: req.params.id },
