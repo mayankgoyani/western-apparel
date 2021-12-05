@@ -72,7 +72,7 @@ service.getProducts = async (req, res, next) => {
 
     if (typeCookie == "undefined" && searchCookie == "undefined") {
         let page = req.query.page || 1
-        let count = await Product.count({});
+        let count = await Product.count({ deleted: false });
         let per_page = 12, total_pages = Math.ceil(count / per_page);
         Product.find({ deleted: false }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
             if (err) throw err;
@@ -90,7 +90,7 @@ service.getProducts = async (req, res, next) => {
     }
     else if (typeCookie != "undefined" && searchCookie == "undefined") {
         let page = req.query.page || 1
-        let count = await Product.count({ type: typeCookie });
+        let count = await Product.count({ type: typeCookie, deleted: false });
         let per_page = 12, total_pages = Math.ceil(count / per_page);
         Product.find({ type: typeCookie, deleted: false }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
             if (err) throw err;
@@ -111,7 +111,7 @@ service.getProducts = async (req, res, next) => {
         let page = req.query.page || 1
         let regex = new RegExp(searchCookie, "i");
         // console.log(regex);
-        let count = await Product.count({ name: regex });
+        let count = await Product.count({ name: regex, deleted: false });
         let per_page = 12, total_pages = Math.ceil(count / per_page);
         Product.find({ name: regex, deleted: false }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
             if (err) throw err;
@@ -131,7 +131,7 @@ service.getProducts = async (req, res, next) => {
         let page = req.query.page || 1
         let regex = new RegExp(searchCookie, "i");
         // console.log(regex);
-        let count = await Product.count({ name: regex, type: typeCookie });
+        let count = await Product.count({ name: regex, type: typeCookie, deleted: false });
         let per_page = 12, total_pages = Math.ceil(count / per_page);
         Product.find({ name: regex, type: typeCookie, deleted: false }).skip((page - 1) * per_page).limit(12).exec((err, product) => {
             if (err) throw err;
